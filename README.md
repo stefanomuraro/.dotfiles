@@ -22,8 +22,21 @@
 
 2. Clone the repository and restore the dotfiles:
 
+   **HTTPS:**
+
    ```bash
    git clone https://github.com/stefanomuraro/.dotfiles.git ~/.dotfiles
+   ```
+
+   **SSH:**
+
+   ```bash
+   git clone git@github.com:stefanomuraro/.dotfiles.git ~/.dotfiles
+   ```
+
+   Then run:
+
+   ```bash
    cd ~/.dotfiles
    stow .
    ```
