@@ -1,0 +1,17 @@
+# backups
+*.bak
+
+# zsh runtime / generated
+.config/zsh/.zsh_history
+.config/zsh/.zcompdump*
+.config/zsh/*.zwc
+.config/zsh/cache/
+
+# zsh dependencies
+.config/zsh/oh-my-zsh/
+.config/zsh/custom/themes/powerlevel10k/
+
+# OS / editor noise
+.DS_Store
+*.swp
+*~
