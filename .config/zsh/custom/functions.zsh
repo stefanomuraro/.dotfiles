@@ -29,15 +29,15 @@ kill_port() {
 # Clean up local branches that are "gone" on the remote
 clean_gone() {
     echo "Fetching latest refs and pruning deleted branches..."
-    git fetch --all --prune 
+    git fetch --all --prune
     echo
 
     local gone_branches
-    gone_branches=$(git branch -vv | awk '/: gone]/{print $1}')
+    gone_branches=$(git branch -vv | awk '/: gone]/{sub(/^\*/, ""); print $1}')
 
     if [[ -z "$gone_branches" ]]; then
         echo "No branches to clean. Everything is up to date."
-        return
+        return 0
     fi
 
     echo "The following branches no longer exist upstream:"
@@ -46,13 +46,21 @@ clean_gone() {
     echo "-----------------------------------------------"
     echo
 
-    read -r "?Delete ALL of these branches? [Y/n]: "
-    local choice=${REPLY:-Y}
-    
-    if [[ "$choice" == [Yy] ]]; then
+    printf "Delete ALL of these branches? [Y/n]: "
+    read -r choice
+
+    choice=${choice:-Y}
+
+    if [[ "$choice" =~ ^[Yy]$ ]]; then
         echo "Deleting branches..."
-        echo "$gone_branches" | xargs git branch -D
-        echo "\nCleanup complete."
+        
+        if echo "$gone_branches" | xargs git branch -D; then
+            echo
+            echo "Cleanup complete."
+        else
+            echo
+            echo "Cleanup failed."
+        fi
     else
         echo "Cleanup cancelled."
     fi
