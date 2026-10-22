@@ -1,0 +1,21 @@
+[user]
+	email = 66977688+stefanomuraro@users.noreply.github.com
+	name = Stefano Muraro
+[credential "https://github.com"]
+    helper = !gh auth git-credential
+[core]
+	editor = nvim
+	pager = delta
+[push]
+	autoSetupRemote = true
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = true
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+[merge]
+	conflictStyle = zdiff3
